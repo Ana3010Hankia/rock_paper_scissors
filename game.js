@@ -20,6 +20,11 @@ function playRound(playerChoice) {
 
     playerChoice = playerChoice.toLowerCase();
 
+    if (!choices.includes(playerChoice)) {
+        console.log("Invalid choice! Please select Rock, Paper, or Scissors.");
+        return "invalid";
+    }
+
     if (playerChoice === computerChoice) {
         result = "IT'S A TIE!";
     } else {
@@ -33,8 +38,6 @@ function playRound(playerChoice) {
             case "scissors":
                 result = (computerChoice === "paper") ? "YOU WIN!" : "YOU LOSE!";
                 break;
-            default:
-                return "Invalid choice! Please select Rock, Paper, or Scissors.";
         }
     }
 
@@ -116,7 +119,11 @@ function newGame() {
             return;
         }
 
-        playRound(playerChoice);
+        const roundResult = playRound(playerChoice);
+        
+        if (roundResult === "invalid") {
+            continue;
+        }
     }
 
     endGame();
