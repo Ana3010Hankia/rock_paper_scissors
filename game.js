@@ -1,4 +1,4 @@
-const choice = ['rock', 'paper', 'scissor'];
+const choice = ['rock', 'paper', 'scissors'];
 
 let playerScore = 0;
 let compScore = 0;
@@ -14,15 +14,15 @@ const playRound = function(playerSelection, computerSelection){
     let computer = computerSelection.toLowerCase().trim();
     if (!choice.includes(player || computer)) {
         return "Invalid choice! Please select Rock, Paper, or Scissors.";
-     } else if ((player === 'rock' && computer === 'scissor') || 
+     } else if ((player === 'rock' && computer === 'scissors') || 
         (player === 'paper' && computer === 'rock') || 
-        (player === 'scissor' && computer === 'paper'))
+        (player === 'scissors' && computer === 'paper'))
         {
             return `You Win! 😯 Impossible! How did you defeat my superior AI logic?!\nYou chose ${player}. AI chose ${computer}`;
 
-        } else if ((computer === 'rock' && player === 'scissor') || 
+        } else if ((computer === 'rock' && player === 'scissors') || 
                     (computer === 'paper' && player === 'rock') || 
-                    (computer === 'scissor' && player === 'paper'))
+                    (computer === 'scissors' && player === 'paper'))
         {
             return `You Lose! 😈 MWAHAHAHA! My circuits are superior to your human brain!\nYou chose ${player}. AI chose ${computer}`;
         } else if (player === computer){
