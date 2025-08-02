@@ -83,7 +83,7 @@ const game = function () {
     console.log("═".repeat(50));
     console.log("🌍 The world is in danger. Only YOU can stop me!");
     console.log("🎮 Defeat me in Rock Paper Scissors to save humanity.");
-    console.log("⚔️ First to 3 wins — or 5 rounds max!");
+    console.log("⚔️ We will battle for 5 rounds - may the best player win!");
     console.log("═".repeat(50));
     console.log("");
 
