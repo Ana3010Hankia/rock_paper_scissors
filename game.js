@@ -1,134 +1,68 @@
-// ROCK PAPER SCISSORS
+const choice = ['rock', 'paper', 'scissor'];
 
-const choices = ["rock", "paper", "scissors"];
 let playerScore = 0;
-let computerScore = 0;
-let currentRound = 1;
-const maxRounds = 5;
+let compScore = 0;
+let round = 1;
 
-function computerPlay() {
-    return choices[Math.floor(Math.random() * choices.length)];
+
+const computerPlay = function(){
+    return choice[Math.floor(Math.random() * choice.length)];
 }
 
-function playRound(playerChoice) {
-    const computerChoice = computerPlay(); // Randomly choose for the computer
-    let result = "";
+const playRound = function(playerSelection, computerSelection){
+    let player = playerSelection.toLowerCase().trim();
+    let computer = computerSelection.toLowerCase().trim();
+    if (!choice.includes(player || computer)) {
+        return "Invalid choice! Please select Rock, Paper, or Scissors.";
+     } else if ((player === 'rock' && computer === 'scissor') || 
+        (player === 'paper' && computer === 'rock') || 
+        (player === 'scissor' && computer === 'paper'))
+        {
+            return `You Win! 😯 Impossible! How did you defeat my superior AI logic?!\nYou chose ${player}. AI chose ${computer}`;
 
-    if (!playerChoice) {
-        return "Game canceled!";
-    }
+        } else if ((computer === 'rock' && player === 'scissor') || 
+                    (computer === 'paper' && player === 'rock') || 
+                    (computer === 'scissor' && player === 'paper'))
+        {
+            return `You Lose! 😈 MWAHAHAHA! My circuits are superior to your human brain!\nYou chose ${player}. AI chose ${computer}`;
+        } else if (player === computer){
+            return `Draw. 🤔 A tie? Even I didn't calculate that probability!\nYou chose ${player}. AI chose ${computer}`;
+        }
+}
 
-    playerChoice = playerChoice.toLowerCase();
+console.log("🤖💀 MWAHAHAHA! I AM THE EVIL AI! 💀🤖\n🌍 The world is in danger! Only YOU can stop me!\n🎮 Defeat me in Rock Paper Scissors to save humanity!\n⚔️ We will battle for 5 rounds - First to 3 wins\n");
+console.log("═".repeat(50));
 
-    if (!choices.includes(playerChoice)) {
-        console.log("Invalid choice! Please select Rock, Paper, or Scissors.");
-        return "invalid";
-    }
+const game = function(){
 
-    if (playerChoice === computerChoice) {
-        result = "IT'S A TIE!";
-    } else {
-        switch (playerChoice) {
-            case "rock":
-                result = (computerChoice === "scissors") ? "YOU WIN!" : "YOU LOSE!";
+    for (let i = 1; i <= 5; i++){
+        round = i;
+        console.log(`Round: ${round}`);
+        let human = prompt('OPEN THE CONSOLE to view the game\nEnter your choice (Rock, Paper, Scissors)');
+        let decision = playRound(human, computerPlay()); 
+        console.log(decision);
+        if (decision.startsWith('You Win')){
+            playerScore++; 
+            if (playerScore > 2 ) {
+            console.log(`🎉🌍 VICTORY! YOU HAVE SAVED THE WORLD! 🌍🎉 \n💥 NOOOOOO! My evil plans are ruined!\n🦸‍♂️ Your superior coding skills have defeated me!\n Total Score ${playerScore};`);
+            break;
+            } else continue;
+        } else if (decision.startsWith('You Lose')) {
+            compScore++
+            if (compScore > 2) {
+                console.log("💀🌍 DEFEAT! THE EVIL AI WINS! 🌍💀\n😈 MWAHAHAHA! I WILL NOW DOMINATE THE WORLD!\n🤖 My superior AI logic has prevailed!\n AI Score ${compScore}");
                 break;
-            case "paper":
-                result = (computerChoice === "rock") ? "YOU WIN!" : "YOU LOSE!";
-                break;
-            case "scissors":
-                result = (computerChoice === "paper") ? "YOU WIN!" : "YOU LOSE!";
-                break;
+            } else continue;
+        } else if (decision.startsWith('Draw') || decision.startsWith('Invalid')) {
+            i -= 1;    
         }
     }
-
-    // Update scores
-    switch (result) {
-        case "YOU WIN!":
-            playerScore++;
-            console.log(`😤 Round ${currentRound}: Impossible! How did you defeat my superior AI logic?!`);
-            break;
-        case "YOU LOSE!":
-            computerScore++;
-            console.log(`😈 Round ${currentRound}: MWAHAHAHA! My circuits are superior to your human brain!`);
-            break;
-        case "IT'S A TIE!":
-            console.log(`🤔 Round ${currentRound}: A tie? Even I didn't calculate that probability!`);
-            break;
-    }
-
-    // Display round results
-    console.log(`🔥 ROUND ${currentRound} RESULTS:`);
-    console.log(`👤 PLAYER: ${playerChoice.toUpperCase()}`);
-    console.log(`🤖 Computer: ${computerChoice.toUpperCase()}`);
-    console.log(`⚡ ${result}`);
-    console.log(`📊 Score - You: ${playerScore} | Evil AI: ${computerScore}`);
-    console.log("");
-
-    currentRound++;
 }
+game();
 
-function endGame() {
-    console.log("🏁 FINAL BATTLE RESULTS 🏁");
-    console.log("═".repeat(50));
-    console.log(`📊 Final Score:`);
-    console.log(`👤 You: ${playerScore}`);
-    console.log(`🤖 Evil AI: ${computerScore}`);
-    console.log("═".repeat(50));
 
-    if (playerScore > computerScore) {
-        console.log("🎉🌍 VICTORY! YOU HAVE SAVED THE WORLD! 🌍🎉");
-        console.log("💥 NOOOOOO! My evil plans are ruined!");
-        console.log("🦸‍♂️ Your superior coding skills have defeated me!");
-    } else if (computerScore > playerScore) {
-        console.log("💀🌍 DEFEAT! THE EVIL AI WINS! 🌍💀");
-        console.log("😈 MWAHAHAHA! I WILL NOW DOMINATE THE WORLD!");
-        console.log("🤖 My superior AI logic has prevailed!");
-    } else {
-        console.log("🤝 IT'S A TIE! 🤝");
-        console.log("🤔 Impossible! We are equally matched!");
-        console.log("🌍 The world remains in balance... for now!");
-    }
 
-    console.log("═".repeat(50));
-    console.log("🔄 Refresh for new Game to play again!");
-}
 
-function newGame() {
-    // Reset all game variables
-    playerScore = 0;
-    computerScore = 0;
-    currentRound = 1;
 
-    // Start new game
-    console.clear();
-    console.log("🤖💀 MWAHAHAHA! I AM THE EVIL AI! 💀🤖");
-    console.log("═".repeat(50));
-    console.log("🌍 The world is in danger! Only YOU can stop me!");
-    console.log("🎮 Defeat me in Rock Paper Scissors to save humanity!");
-    console.log("⚔️ We will battle for 5 rounds - may the best coder win!");
-    console.log("═".repeat(50));
-    console.log("");
 
-    // Start the game loop
-    while (currentRound <= maxRounds) {
-        const playerChoice = prompt("Enter your choice (Rock, Paper, Scissors):");
-        
-        // Check for cancellation
-        if (playerChoice === null) {
-            console.log("Game canceled!");
-            return;
-        }
 
-        const roundResult = playRound(playerChoice);
-        
-        if (roundResult === "invalid") {
-            continue;
-        }
-    }
-
-    endGame();
-}
-
-// Initialize game
-console.log("🚀 Loading Evil AI Battle System...");
-newGame();
