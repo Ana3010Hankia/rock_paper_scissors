@@ -30,7 +30,7 @@ const computerPlay = function(){
 }
 
 const cancel = function(){
-    console.log("👋 Game cancelled. Refresh the page to play again");
+    console.log("👋 Game cancelled. 🔃 Refresh the page to play again");
 }
 
 
@@ -64,7 +64,7 @@ const game = function(){
     
     for (let i = 1; i <= 5; i++){
         round = i;
-        console.log(`Round: ${round}`);
+        console.log(`🌀 Round: ${round}`);
 
         let human = humanInput();
         let result = playRound(human, computerPlay());        
